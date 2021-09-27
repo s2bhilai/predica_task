@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Trip_Management_Contracts\Trip_Management_Contracts.csproj" />
+    <ProjectReference Include="..\Trip_Management_Entities\Trip_Management_Entities.csproj" />
+  </ItemGroup>
+
+</Project>
