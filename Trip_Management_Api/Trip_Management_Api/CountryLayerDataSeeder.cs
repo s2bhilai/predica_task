@@ -54,29 +54,6 @@ namespace Trip_Management_Api
                 {
                     countryLayerDetails = 
                         stream.ReadAndDeserializeFromJson<List<CountryLayer>>();
-
-                    //using (var serviceScope = _serviceProvider.GetRequiredService<IServiceScopeFactory>().CreateScope())
-                    //{
-                    //    var tripcontext = serviceScope.ServiceProvider.GetService<TripContext>();
-
-                    //    if (!tripcontext.TripSpots.Any())
-                    //    {
-                    //        List<TripSpot> tripSpots = new List<TripSpot>();
-
-                    //        foreach (CountryLayer cl in countryLayerDetails)
-                    //        {
-                    //            tripSpots.Add(new TripSpot()
-                    //            {
-                    //                CountryName = cl.Name,
-                    //                Region = cl.Region,
-                    //                Capital = cl.Capital
-                    //            });
-                    //        }
-
-                    //        tripcontext.TripSpots.AddRange(tripSpots);
-                    //        tripcontext.SaveChanges();
-                    //    }
-                    //}
                 }
                 catch(Exception ex)
                 {

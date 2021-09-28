@@ -10,27 +10,27 @@ using Trip_Management_Entities.Models;
 
 namespace Trip_Management_Repository
 {
-    public class TripRepository : RepositoryBase<Trip>, ITripRepository
+    public class TripDetailsRepository : RepositoryBase<TripDetail>, ITripDetailRepository
     {
-        public TripRepository(TripContext tripContext)
-            :base(tripContext)
+        public TripDetailsRepository(TripContext tripContext)
+            : base(tripContext)
         {
 
         }
 
-        public void CreateTrip(Trip trip)
+        public void AddTripDetailsForTrip(int tripId, TripDetail tripDetail)
         {
-            Create(trip);
+            Create(tripDetail);
         }
 
-        public async Task<Trip> GetTripAsync(int tripId, bool trackChanges)
+        public async Task<TripDetail> GetTripDetailsAsync(int tripId, bool trackChanges)
         {
             return await FindByCondition(c => c.TripId.Equals(tripId), trackChanges).SingleOrDefaultAsync();
         }
 
-        public void UpdateTrip(int tripId, Trip trip)
+        public void UpdateTripDetails(int tripId, TripDetail tripDetail)
         {
-            Update(trip);
+            Update(tripDetail);
         }
     }
 }

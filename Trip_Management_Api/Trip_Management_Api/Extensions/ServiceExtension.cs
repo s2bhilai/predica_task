@@ -6,7 +6,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Trip_Management_Contracts;
 using Trip_Management_Entities;
+using Trip_Management_Repository;
 
 namespace Trip_Management_Api.Extensions
 {
@@ -27,9 +29,12 @@ namespace Trip_Management_Api.Extensions
             var apiSettings = configuration.GetSection("CountryLayer_API_Info");
 
             services.AddHttpClient("countryLayerApi", client =>
-             {
+            {
                  client.BaseAddress = new Uri(apiSettings.GetSection("ApiUrl").Value);
-             });
+            });
         }
+
+        public static void ConfigureRepositoryManager(this IServiceCollection services) =>
+           services.AddScoped<IRepositoryManager, RepositoryManager>();
     }
 }

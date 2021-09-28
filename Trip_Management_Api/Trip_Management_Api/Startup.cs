@@ -1,3 +1,4 @@
+using AutoMapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -35,6 +36,9 @@ namespace Trip_Management_Api
             services.ConfigureCountryLayerHttpClient(Configuration);
 
             services.AddTransient<CountryLayerDataSeeder>();
+
+            services.ConfigureRepositoryManager();
+            services.AddAutoMapper(typeof(Startup));
 
             services.AddSwaggerGen(c =>
             {

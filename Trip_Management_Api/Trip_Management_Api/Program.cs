@@ -24,14 +24,14 @@ namespace Trip_Management_Api
                 try
                 {
                     var tripcontext = scope.ServiceProvider.GetService<TripContext>();
-                    //context.Database.EnsureDeleted();
+                    //tripcontext.Database.EnsureDeleted();
                     tripcontext.Database.EnsureCreated();
 
                     var seeder = scope.ServiceProvider.GetService<CountryLayerDataSeeder>();
-                    List<CountryLayer> countryLayerDetails =  seeder.SeedCountryData().GetAwaiter().GetResult();
-
+                    
                     if (!tripcontext.TripSpots.Any())
                     {
+                        List<CountryLayer> countryLayerDetails = seeder.SeedCountryData().GetAwaiter().GetResult();
                         List<TripSpot> tripSpots = new List<TripSpot>();
 
                         foreach (CountryLayer cl in countryLayerDetails)

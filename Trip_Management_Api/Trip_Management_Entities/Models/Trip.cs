@@ -13,8 +13,8 @@ namespace Trip_Management_Entities.Models
         public Int32 TripId { get; set; }
         public string TripName { get; set; }
         public string Trip_Start_Location { get; set; }
-        public DateTime Trip_Start_Date { get; set; }
-        public DateTime Trip_End_Date { get; set; }
+        public DateTimeOffset Trip_Start_Date { get; set; }
+        public DateTimeOffset Trip_End_Date { get; set; }
         public string Trip_Itinerary_Desc { get; set; }
         public string Created_By { get; set; }
         public string IsCancelled { get; set; }

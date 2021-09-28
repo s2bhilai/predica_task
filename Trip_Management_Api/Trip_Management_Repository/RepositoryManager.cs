@@ -13,7 +13,8 @@ namespace Trip_Management_Repository
         private TripContext _tripContext;
         private ITripRepository _tripRepository;
         private ICustomerRepository _customerRepository;
-        
+        private ITripDetailRepository _tripDetailsRepository;
+
         public RepositoryManager(TripContext tripContext)
         {
             _tripContext = tripContext;
@@ -41,9 +42,20 @@ namespace Trip_Management_Repository
             }
         }
 
+        public ITripDetailRepository TripDetails
+        {
+            get
+            {
+                if (_tripDetailsRepository == null)
+                    _tripDetailsRepository = new TripDetailsRepository(_tripContext);
+
+                return _tripDetailsRepository;
+            }
+        }
+
         public Task SaveAsync()
         {
-            throw new NotImplementedException();
+            return _tripContext.SaveChangesAsync();
         }
     }
 }
