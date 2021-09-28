@@ -15,5 +15,7 @@ namespace Trip_Management_Entities.Models
         public Trip Trip { get; set; }
         public Int32 CustomerId { get; set; }
         public Customer Customer { get; set; }
+        public DateTimeOffset Trip_Start_Date { get; set; }
+        public DateTimeOffset Trip_End_Date { get; set; }
     }
 }

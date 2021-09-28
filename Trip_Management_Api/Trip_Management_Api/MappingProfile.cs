@@ -20,6 +20,10 @@ namespace Trip_Management_Api
             CreateMap<TripUpdateDto, TripDetail>();
 
             CreateMap<TripDetail, TripDetailsDto>();
+
+            CreateMap<Customer, CustomerDto>();
+
+            CreateMap<CustomerCreationDto, Customer>();
         }
     }
 }

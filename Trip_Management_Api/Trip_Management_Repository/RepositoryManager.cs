@@ -14,6 +14,7 @@ namespace Trip_Management_Repository
         private ITripRepository _tripRepository;
         private ICustomerRepository _customerRepository;
         private ITripDetailRepository _tripDetailsRepository;
+        private ICustomerTripRepository _customerTripRepository;
 
         public RepositoryManager(TripContext tripContext)
         {
@@ -50,6 +51,17 @@ namespace Trip_Management_Repository
                     _tripDetailsRepository = new TripDetailsRepository(_tripContext);
 
                 return _tripDetailsRepository;
+            }
+        }
+
+        public ICustomerTripRepository CustomerTrips
+        {
+            get
+            {
+                if (_customerTripRepository == null)
+                    _customerTripRepository = new CustomerTripRepository(_tripContext);
+
+                return _customerTripRepository;
             }
         }
 

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,6 +16,16 @@ namespace Trip_Management_Repository
             :base(tripContext)
         {
 
+        }
+
+        public void CreateCustomer(Customer customer)
+        {
+            Create(customer);
+        }
+
+        public async Task<Customer> GetCustomerAsync(int customerId, bool trackChanges)
+        {
+            return await FindByCondition(c => c.CustomerId.Equals(customerId), trackChanges).SingleOrDefaultAsync();
         }
     }
 }

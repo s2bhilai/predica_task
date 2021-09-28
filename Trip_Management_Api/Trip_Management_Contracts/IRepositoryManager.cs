@@ -11,6 +11,7 @@ namespace Trip_Management_Contracts
         ICustomerRepository Customer { get; }
         ITripRepository Trip { get; }
         ITripDetailRepository TripDetails { get; }
+        ICustomerTripRepository CustomerTrips { get; }
         Task SaveAsync();
     }
 }

@@ -32,6 +32,13 @@ namespace Trip_Management_Repository
                 _tripContext.Set<T>().Where(expression);
         }
 
+        public IQueryable<T> FindAll(bool trackChanges)
+        {
+            return !trackChanges ? _tripContext.Set<T>().AsNoTracking() :
+              _tripContext.Set<T>();
+        }
+
+
         public void Update(T entity) => _tripContext.Set<T>().Update(entity);
     }
 }

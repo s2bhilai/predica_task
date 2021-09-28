@@ -7,9 +7,10 @@ using Trip_Management_Entities.Models;
 
 namespace Trip_Management_Contracts
 {
-    public interface ICustomerRepository
+    public interface ICustomerTripRepository
     {
-        Task<Customer> GetCustomerAsync(int customerId, bool trackChanges);
-        void CreateCustomer(Customer customer);
+        Task<IEnumerable<TripCustomer>> GetAllTripsForCustomersAsync(int customerId, bool trackChanges);
+
+        void AddCustomerToTrip(TripCustomer tripCustomer);
     }
 }

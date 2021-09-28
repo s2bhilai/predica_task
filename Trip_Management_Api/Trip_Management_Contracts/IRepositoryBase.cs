@@ -13,5 +13,6 @@ namespace Trip_Management_Contracts
         void Create(T entity);
         void Update(T entity);
         void Delete(T entity);
+        IQueryable<T> FindAll(bool trackChanges);
     }
 }
