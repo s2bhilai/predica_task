@@ -27,5 +27,6 @@ namespace Trip_Management_Repository
         {
             return await FindByCondition(c => c.CustomerId.Equals(customerId), trackChanges).SingleOrDefaultAsync();
         }
+
     }
 }

@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -44,6 +45,7 @@ namespace Trip_Management_Api.Controllers
 
 
         [HttpPost("createtrip")]
+        [Authorize(Roles="User")]
         public async Task<IActionResult> CreateTrip([FromBody]TripCreationDto tripCreationDto)
         {
             var tripEntity = _mapper.Map<Trip>(tripCreationDto);

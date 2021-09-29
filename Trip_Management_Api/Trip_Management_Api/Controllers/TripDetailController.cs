@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -43,6 +44,7 @@ namespace Trip_Management_Api.Controllers
         }
 
         [HttpPost("edittrip")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> EditTrip([FromBody] TripUpdateDto tripUpdateDto)
         {
             //Check if trip exists
