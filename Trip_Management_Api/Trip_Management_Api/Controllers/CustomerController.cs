@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -43,6 +44,7 @@ namespace Trip_Management_Api.Controllers
         }
 
         [HttpPost("createcustomer")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> CreateCustomer([FromBody] CustomerCreationDto customerCreationDto)
         {
             var customerEntity = _mapper.Map<Customer>(customerCreationDto);
@@ -58,6 +60,7 @@ namespace Trip_Management_Api.Controllers
         }
 
         [HttpPost("assigncustomertotrip")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> AssignCustomerToTrip(int customerId,int tripId)
         {
             //Check if customer and trip are valid

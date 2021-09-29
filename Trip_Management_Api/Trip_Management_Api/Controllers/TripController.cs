@@ -45,12 +45,13 @@ namespace Trip_Management_Api.Controllers
 
 
         [HttpPost("createtrip")]
-        [Authorize(Roles="User")]
+        [Authorize(Roles="Admin")]
         public async Task<IActionResult> CreateTrip([FromBody]TripCreationDto tripCreationDto)
         {
             var tripEntity = _mapper.Map<Trip>(tripCreationDto);
 
             tripEntity.IsCancelled = "N";
+            tripEntity.Created_On = DateTime.Now;
 
             _repositoryManager.Trip.CreateTrip(tripEntity);
             await _repositoryManager.SaveAsync();
@@ -63,6 +64,7 @@ namespace Trip_Management_Api.Controllers
         }
 
         [HttpPost("cancel/{tripId}")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> CancelTrip(int tripId)
         {
             var trip = await _repositoryManager
@@ -74,12 +76,20 @@ namespace Trip_Management_Api.Controllers
             }
             else
             {
-                trip.IsCancelled = "Y";
-                _repositoryManager.Trip.UpdateTrip(tripId,trip);
-                await _repositoryManager.SaveAsync();
+                //check if trip is cancelled within 7 days
+                int noOfDays = (DateTime.Now - trip.Created_On).Days;
 
-                var tripDto = _mapper.Map<TripDto>(trip);
-                return Ok(tripDto);
+                if(noOfDays > 7)
+                {
+                    trip.IsCancelled = "Y";
+                    _repositoryManager.Trip.UpdateTrip(tripId, trip);
+                    await _repositoryManager.SaveAsync();
+
+                    var tripDto = _mapper.Map<TripDto>(trip);
+                    return Ok(tripDto);
+                }
+
+                return Ok("Trip cannot be cancelled with in 7 days.");
             }
         }
 
