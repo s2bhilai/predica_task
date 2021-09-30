@@ -12,6 +12,7 @@ using System.Threading.Tasks;
 using Trip_Management_Contracts;
 using Trip_Management_Entities;
 using Trip_Management_Repository;
+using TripManagement_LoggerService;
 
 namespace Trip_Management_Api.Extensions
 {
@@ -72,5 +73,8 @@ namespace Trip_Management_Api.Extensions
                 });
             });
         }
+
+        public static void ConfigureLoggerService(this IServiceCollection services) =>
+           services.AddScoped<ILoggerManager, LoggerManager>();
     }
 }

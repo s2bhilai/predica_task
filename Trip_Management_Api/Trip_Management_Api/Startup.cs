@@ -10,11 +10,14 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.Identity.Web;
 using Microsoft.OpenApi.Models;
+using NLog;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Trip_Management_Api.Extensions;
+using TripManagement_LoggerService;
 
 namespace Trip_Management_Api
 {
@@ -22,6 +25,7 @@ namespace Trip_Management_Api
     {
         public Startup(IConfiguration configuration)
         {
+            LogManager.LoadConfiguration(string.Concat(Directory.GetCurrentDirectory(), "/nlog.config"));
             Configuration = configuration;
         }
 
@@ -37,6 +41,8 @@ namespace Trip_Management_Api
 
             services.ConfigureSqlContext(Configuration);
 
+            services.ConfigureLoggerService();
+
             services.ConfigureCountryLayerHttpClient(Configuration);
 
             services.AddTransient<CountryLayerDataSeeder>();
@@ -48,7 +54,7 @@ namespace Trip_Management_Api
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ILoggerManager logger)
         {
             if (env.IsDevelopment())
             {
@@ -57,6 +63,7 @@ namespace Trip_Management_Api
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Trip_Management_Api v1"));
             }
 
+            app.ConfigureExceptionHandler(logger);
             app.UseHttpsRedirection();
 
             app.UseRouting();

@@ -17,6 +17,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\LoggerService\TripManagement_LoggerService.csproj" />
     <ProjectReference Include="..\Trip_Management_Repository\Trip_Management_Repository.csproj" />
   </ItemGroup>
 
